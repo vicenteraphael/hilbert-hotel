@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %} Homepage {% endblock %}
+
+{% block content %}
+    <a href="{{ url_for('routes.login') }}">Login</a>
+    <a href="{{ url_for('routes.register') }}">Sign in</a>
+    <a href="{{ url_for('routes.user') }}">Olá</a>
+{% endblock %}

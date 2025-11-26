@@ -1,0 +1,83 @@
+from flask import render_template, request, jsonify
+from flask_security import roles_accepted
+from flask_login import login_required, current_user
+from app.routes import routes_bp
+from app.models import Reservation
+from app import db, send_email
+from datetime import date, datetime
+from zoneinfo import ZoneInfo
+
+@routes_bp.route('/dashboard/api/alter/status', methods=['POST'])
+@login_required
+@roles_accepted('manager', 'worker')
+def alter_rent_status():
+    if request.method == 'POST' and request.is_json:
+        try:
+            data = request.get_json()
+            new_status = data.get("new_status")
+            reservation = Reservation.query.get(data.get('reservation_id'))
+
+            db.session.commit()
+
+            operation = {
+                "ACTIVE" : "retirada",
+                "CLOSED" : "devolução",
+                "CLOSED_LATE" : "devolução com atraso"
+            }
+            op = operation[new_status]
+            title = f"Atestado de {op}"
+            message = f"Foi registrada em {date.today().strftime("%d/%m/%Y")}, às {datetime.now(ZoneInfo("America/Sao_Paulo")).strftime("%H:%M:%S")} a devolução do seu veículo pelo funcionário {current_user.name}. Se você não fez a {op}, contate-nos imediatamente!"
+            if send_email (
+                subject=f"Registro de {op}",
+                recipients=[Reservation.user.email],
+                body_text=render_template('email.html', reservation=reservation, title=title, message=message)
+            ):
+                return jsonify({
+                    "success" : True,
+                    "title" : "Locação alterada com sucesso!",
+                    "message" : f"Um email ao cliente foi enviado atestando a {op}",
+                    "type" : "success"
+                })
+            
+            return jsonify({
+                    "success" : False,
+                    "title" : "Locação alterada com sucesso!",
+                    "message" :"Entretanto, ocorreu um erro ao enviar o email ao cliente...",
+                    "type" : "info"
+                })
+        
+        except Exception as e:
+            print("Erro ao alterar status da locação:", e)
+            return jsonify({
+                "success" : False,
+                "title" : "Erro na aplicação",
+                "message" : "Não foi possível registrar a operação... Tente novamente mais tarde",
+                "type" : "error"
+            })
+
+# @routes_bp.route('/dashboard/rents/pending')
+# @login_required
+# @roles_accepted('manager', 'worker')
+# def pending_rents():
+#     pending_rents = Reservation.query.filter_by(status=RentalStatus.PENDING).all()
+#     btn_class = "pending"
+#     btn_message = "Atestar retirada"
+#     return render_template('main/rents.html', rents=pending_rents, btn_class=btn_class, btn_message=btn_message)
+
+# @routes_bp.route('/dashboard/rents/active')
+# @login_required
+# @roles_accepted('manager', 'worker')
+# def active_rents():
+#     active_rents = Rental.query.filter_by(status=RentalStatus.ACTIVE).all()
+#     btn_class = "active"
+#     btn_message = "Atestar devolução"
+#     return render_template('main/rents.html', rents=active_rents, btn_class=btn_class, btn_message=btn_message)
+
+# @routes_bp.route('/dashboard/rents/late')
+# @login_required
+# @roles_accepted('manager', 'worker')
+# def late_rents():
+#     late_rents = Rental.query.filter_by(status=RentalStatus.LATE).all()
+#     btn_class = "late"
+#     btn_message = "Atestar devolução atrasada"
+#     return render_template('main/rents.html', rents=late_rents, btn_class=btn_class, btn_message=btn_message)

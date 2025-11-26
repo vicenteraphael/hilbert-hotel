@@ -1,0 +1,22 @@
+<h1 style="justify-self: center;">{{ title }}</h1>
+
+<p>
+    {{ message }}
+</p>
+
+<hr>
+<h3>Dados do cliente</h3>
+<ul>
+    <li>Cliente: {{ reservation.user.name }}</li>
+    <li>CPF: {{ reservation.user.cpf }}</li>
+    
+</ul>
+<h3>Dados da reserva</h3>
+<ul>
+    <li>ID: {{ reservation.id }}</li>
+<h3>Valores</h3>
+    <ul>
+        <li><b>Total geral<b>: {{ reservation.total | currency }}</li>
+    </ul>
+<hr>
+<h4>ESTE É UM DISPARO AUTOMÁTICO. POR FAVOR NÃO RESPONDA A ESTE EMAIL</h4>

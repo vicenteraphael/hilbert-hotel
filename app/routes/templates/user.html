@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% from "rent-details-macros.html" import rent_details %}
+
+{% block title %} {{ current_user.name }} {% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{{ url_for('static', filename='js/rentHistory.js') }}"></script>
+{% endblock %}
+
+{% block content %} 
+    <h1>Olá usuário</h1>
+{% endblock %}
