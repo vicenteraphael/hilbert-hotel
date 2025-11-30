@@ -28,7 +28,7 @@ def register():
             user_datastore.add_role_to_user(user, 'client')
             db.session.commit()
             login_user(user)
-            return redirect(url_for('main.index'))
+            return redirect(url_for('routes.index'))
         else:
             flash("Já existe um usuário com as mesmas credenciais")
    

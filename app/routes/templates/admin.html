@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto">
+    <h2 class="text-2xl text-white mb-6 border-l-4 border-hilbert-gold pl-3">Painel de Gestão Total (God Mode)</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div class="bg-slate-800 p-6 rounded-lg shadow border-t-2 border-green-500">
+            <h3 class="text-slate-400 text-sm uppercase">Receita Atual</h3>
+            <p class="text-3xl font-bold text-white mt-2">∞ BRL</p>
+        </div>
+        <div class="bg-slate-800 p-6 rounded-lg shadow border-t-2 border-blue-500">
+            <h3 class="text-slate-400 text-sm uppercase">Quartos Ocupados</h3>
+            <p class="text-3xl font-bold text-white mt-2">ℵ₀ (Aleph-zero)</p>
+        </div>
+        <div class="bg-slate-800 p-6 rounded-lg shadow border-t-2 border-purple-500">
+            <h3 class="text-slate-400 text-sm uppercase">Funcionários</h3>
+            <p class="text-3xl font-bold text-white mt-2">42</p>
+        </div>
+        <div class="bg-slate-800 p-6 rounded-lg shadow border-t-2 border-hilbert-gold">
+            <h3 class="text-slate-400 text-sm uppercase">Preço Base (N)</h3>
+            <p class="text-3xl font-bold text-white mt-2">$ 150,00</p>
+        </div>
+    </div>
+
+    <div class="bg-slate-800 rounded-lg overflow-hidden shadow-xl">
+        <div class="p-4 border-b border-slate-700 flex justify-between items-center">
+            <h3 class="font-bold text-white">Equipe do Hotel</h3>
+            <button class="bg-hilbert-accent hover:bg-blue-600 text-white px-4 py-2 rounded text-sm transition">
+                + Novo Usuário
+            </button>
+        </div>
+        <table class="w-full text-left text-sm text-slate-400">
+            <thead class="bg-slate-700 text-slate-200 uppercase">
+                <tr>
+                    <th class="px-6 py-3">ID</th>
+                    <th class="px-6 py-3">Nome</th>
+                    <th class="px-6 py-3">Cargo</th>
+                    <th class="px-6 py-3">Status</th>
+                    <th class="px-6 py-3">Ações</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-700">
+                <tr class="hover:bg-slate-700/50">
+                    <td class="px-6 py-4">001</td>
+                    <td class="px-6 py-4 font-medium text-white">Georg Cantor</td>
+                    <td class="px-6 py-4"><span class="bg-purple-900 text-purple-200 py-1 px-3 rounded-full text-xs">Admin</span></td>
+                    <td class="px-6 py-4 text-green-400">Ativo</td>
+                    <td class="px-6 py-4"><button class="text-blue-400 hover:text-white">Editar</button></td>
+                </tr>
+                <tr class="hover:bg-slate-700/50">
+                    <td class="px-6 py-4">002</td>
+                    <td class="px-6 py-4 font-medium text-white">David Hilbert</td>
+                    <td class="px-6 py-4"><span class="bg-blue-900 text-blue-200 py-1 px-3 rounded-full text-xs">Gerente</span></td>
+                    <td class="px-6 py-4 text-green-400">Ativo</td>
+                    <td class="px-6 py-4"><button class="text-blue-400 hover:text-white">Editar</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

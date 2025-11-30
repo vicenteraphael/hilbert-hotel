@@ -10,13 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
         nation: document.getElementById("nation"),
         phone: document.getElementById("phone"),
 
-        country: document.getElementById("country"),
-        state: document.getElementById("state"),
-        city: document.getElementById("city"),
-        CEP: document.getElementById("CEP"),
-        road: document.getElementById("road"),
-        hood: document.getElementById("hood"),
-
         password: document.getElementById("password"),
         confirmPassword: document.getElementById("confirm-password"),
     };
@@ -100,14 +93,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return true;
     }
 
-    function validateCEP() {
-        const regex = /^\d{5}-?\d{3}$/;
-        if (!regex.test(fields.CEP.value))
-            return showError(fields.CEP, "CEP inválido.");
-        clearError(fields.CEP);
-        return true;
-    }
-
     function validateRequired(field) {
         if (field.value.trim() === "") {
             showError(field, "Campo obrigatório.");
@@ -151,7 +136,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 case "CPF": validateCPF(); break;
                 case "data": validateBirthdate(); break;
                 case "phone": validatePhone(); break;
-                case "CEP": validateCEP(); break;
                 case "password": validatePassword(); break;
                 case "confirm-password": validatePasswordConfirm(); break;
                 default: validateRequired(field);
@@ -168,13 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
             validatePhone() &&
             validateCEP() &&
             validatePassword() &&
-            validatePasswordConfirm() &&
-            validateRequired(fields.nation) &&
-            validateRequired(fields.country) &&
-            validateRequired(fields.state) &&
-            validateRequired(fields.city) &&
-            validateRequired(fields.road) &&
-            validateRequired(fields.hood);
+            validatePasswordConfirm();
 
         if (!valid) {
             e.preventDefault();

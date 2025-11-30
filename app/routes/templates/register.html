@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
 {% endblock %}
 
 
@@ -64,45 +64,6 @@
                     <label>Celular</label><br>
                     <input type="tel" name="phone" id="phone" placeholder="Digite seu número de telefone" required>
                     <div id="phone-error" class="error-message"></div>
-                </div>
-            </div>
-
-            <h3 class="input-title">Endereço</h3>
-            <div id="input-group-adress" class="form-grid">
-                <div class="input-group">
-                    <label>País</label><br>
-                    <input type="text" name="country" id="country" placeholder="Digite seu país" required>
-                    <div id="country-error" class="error-message"></div>
-                </div>
-
-                <div class="input-group">
-                    <label>Estado</label><br>
-                    <input type="text" name="state" id="state" placeholder="Digite seu estado" required>
-                    <div id="estado-error" class="error-message"></div>
-                </div>
-
-                <div class="input-group">
-                    <label>Cidade</label><br>
-                    <input type="text" name="city" id="city"  placeholder="Digite sua cidade" required>
-                    <div id="city-error" class="error-message"></div>
-                </div>
-
-                <div class="input-group">
-                    <label>CEP</label><br>
-                    <input type="text" name="CEP" id="CEP" placeholder="Digite seu CEP" required>
-                    <div id="CEP-error" class="error-message"></div>
-                </div>
-
-                <div class="input-group">
-                    <label>Rua</label><br>
-                    <input type="text" name="road" id="road" placeholder="Digite sua Rua" required>
-                    <div id="road-error" class="error-message"></div>
-                </div>
-
-                <div class="input-group">
-                    <label>Bairro</label><br>
-                    <input type="text" name="hood" id="hood" placeholder="Digite seu bairro" required>
-                    <div id="hood-error" class="error-message"></div>
                 </div>
             </div>
 

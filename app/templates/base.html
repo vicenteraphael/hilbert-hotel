@@ -4,25 +4,50 @@
     {% block head %}
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Hilbert Hotel | {% block title %} {% endblock %}</title>
 
         <link href="https://fonts.googleapis.com/css?family=Overpass" rel="stylesheet">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
         {% block extra_css %}{% endblock %}
 
+        <script src="https://cdn.tailwindcss.com"></script>
         <script src="{{ url_for('static', filename='js/sweetalert.min.js') }}"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            hilbert: {
+                                dark: '#0f172a',
+                                accent: '#3b82f6',
+                                gold: '#fbbf24',
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
         {% block extra_js %}{% endblock %}
     {% endblock %}
 </head>
+<body class="bg-hilbert-dark text-slate-200 font-sans antialiased min-h-screen flex flex-col">
+    
+    <nav class="bg-slate-800 border-b border-slate-700 p-4 flex justify-between items-center shadow-lg">
+        <div class="flex items-center gap-2">
+            <i class="fa-solid fa-infinity text-hilbert-accent text-2xl"></i>
+            <span class="text-xl font-bold tracking-wider text-white">HILBERT HOTEL</span>
+        </div>
+        <div class="text-sm text-slate-400">
+            Conectado como: {{ current_user.name }} <span class="text-white font-semibold">{{ role|upper }}</span>
+            <a href="{{ url_for('routes.logout') }}" class="ml-4 text-red-400 hover:text-red-300"><i class="fa-solid fa-sign-out-alt"></i> Sair</a>
+        </div>
+    </nav>
 
-<body>
-    <main>
-        {% block content %}
-        
-        {% endblock %}
+    <main class="flex-grow p-6">
+        {% block content %}{% endblock %}
     </main>
-    <footer style="margin-top:auto;">
-        <p>© 2025 Hilbert Hotel — Todos os direitos reservados.</p>
+
+    <footer class="text-center p-4 text-slate-600 text-sm">
+        &copy; ∞ Hotel de Hilbert. Onde sempre cabe mais um.
     </footer>
 </body>
 </html>
