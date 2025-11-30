@@ -41,9 +41,10 @@ def get_user_datastore():
 
 def create_roles():
     global user_datastore
-    user_datastore.find_or_create_role(name='manager', description='Gerente do sistema')
-    user_datastore.find_or_create_role(name='worker', description='Funcionário do sistema')
-    user_datastore.find_or_create_role(name='client', description='Cliente do sistema')
+    user_datastore.find_or_create_role(name='admin', description='Gerente do sistema')
+    user_datastore.find_or_create_role(name='receptionist', description='Recepcionista do sistema')
+    user_datastore.find_or_create_role(name='housekeeper', description='Camareira do sistema')
+    user_datastore.find_or_create_role(name='guest', description='Hóspede do sistema')
     db.session.commit()
 
 def create_app():

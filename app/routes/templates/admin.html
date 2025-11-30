@@ -31,31 +31,32 @@
             </button>
         </div>
         <table class="w-full text-left text-sm text-slate-400">
-            <thead class="bg-slate-700 text-slate-200 uppercase">
-                <tr>
-                    <th class="px-6 py-3">ID</th>
-                    <th class="px-6 py-3">Nome</th>
-                    <th class="px-6 py-3">Cargo</th>
-                    <th class="px-6 py-3">Status</th>
-                    <th class="px-6 py-3">Ações</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-700">
-                <tr class="hover:bg-slate-700/50">
-                    <td class="px-6 py-4">001</td>
-                    <td class="px-6 py-4 font-medium text-white">Georg Cantor</td>
-                    <td class="px-6 py-4"><span class="bg-purple-900 text-purple-200 py-1 px-3 rounded-full text-xs">Admin</span></td>
-                    <td class="px-6 py-4 text-green-400">Ativo</td>
-                    <td class="px-6 py-4"><button class="text-blue-400 hover:text-white">Editar</button></td>
-                </tr>
-                <tr class="hover:bg-slate-700/50">
-                    <td class="px-6 py-4">002</td>
-                    <td class="px-6 py-4 font-medium text-white">David Hilbert</td>
-                    <td class="px-6 py-4"><span class="bg-blue-900 text-blue-200 py-1 px-3 rounded-full text-xs">Gerente</span></td>
-                    <td class="px-6 py-4 text-green-400">Ativo</td>
-                    <td class="px-6 py-4"><button class="text-blue-400 hover:text-white">Editar</button></td>
-                </tr>
-            </tbody>
+                <thead class="bg-slate-700 text-slate-200 uppercase">
+                    <tr>
+                        <th class="px-6 py-3">ID</th>
+                        <th class="px-6 py-3">Nome</th>
+                        <th class="px-6 py-3">Cargo</th>
+                        <th class="px-6 py-3">Status</th>
+                        <th class="px-6 py-3">Ações</th>
+                    </tr>
+                </thead>
+                {% for user in users %}
+                    <tbody class="divide-y divide-slate-700">
+                        <tr class="hover:bg-slate-700/50">
+                            <td class="px-6 py-4">{{ user.id }}</td>
+                            <td class="px-6 py-4 font-medium text-white">{{ user.name }}</td>
+                            {% for role in user.roles %}
+                                <td class="px-6 py-4"><span class="bg-purple-900 text-purple-200 py-1 px-3 rounded-full text-xs">{{ role.name }}</span></td>
+                            {% endfor %}
+                            {% if user.active %}
+                                <td class="px-6 py-4 text-green-400">Ativo</td>
+                            {% else %}
+                                <td class="px-6 py-4 text-red-400">Inativo</td>
+                            {% endif %}
+                            <td class="px-6 py-4"><button class="text-blue-400 hover:text-white">Editar</button></td>
+                        </tr>
+                    </tbody>
+                {% endfor %}
         </table>
     </div>
 </div>

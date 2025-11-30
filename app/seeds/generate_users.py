@@ -5,12 +5,12 @@ import hashlib
 def seed_users(app):
 
     @app.cli.command("seed_users")
-    def seed(qnt_users=10):
+    def seed(qnt_users=12):
 
         user_datastore = get_user_datastore()
         #creates n fake users
-        roles = qnt_users//2*['client'] + qnt_users//2*['worker']
-        if len(roles) != qnt_users: roles.append('worker')
+        roles = (qnt_users//3)*(['receptionist']+['guest']+['housekeeper'])
+        while len(roles) != qnt_users: roles.append('housekeeper')
         for _ in range (qnt_users):
             name = faker.first_name()
             first_name = name.lower().split()[0]
@@ -30,16 +30,41 @@ def seed_users(app):
                 
 
         #create the manager
-        email = "abc@gmail.com"
-        hashed_email = hashlib.sha256("abc@gmail.com".encode()).hexdigest()
+        email = "admin@test.com"
+        hashed_email = hashlib.sha256(email.encode()).hexdigest()
         if not user_datastore.find_user(email_hash=hashed_email):
-            manager = user_datastore.create_user(
+            admin = user_datastore.create_user(
                 name = "Raphael Vicente",
                 email = email,
                 password = bcrypt.generate_password_hash("abc12345").decode('utf-8'),
-                cpf = "08199671068"
+                cpf = "08189671068"
             )
-            user_datastore.add_role_to_user(manager, "manager")
-            print("Create manager:", manager)
+            user_datastore.add_role_to_user(admin, "admin")
+            print("Create admin:", admin)
+
+        #create a receptionist
+        email = "receptionist@test.com"
+        hashed_email = hashlib.sha256(email.encode()).hexdigest()
+        if not user_datastore.find_user(email_hash=hashed_email):
+            receptionist = user_datastore.create_user(
+                name = "Ricardo Agostinho",
+                email = email,
+                password = bcrypt.generate_password_hash("abc12345").decode('utf-8'),
+                cpf = "08149370068"
+            )
+            user_datastore.add_role_to_user(receptionist, "receptionist")
+            print("Create receptionist:", receptionist)
+
+        email = "housekeeper@test.com"
+        hashed_email = hashlib.sha256(email.encode()).hexdigest()
+        if not user_datastore.find_user(email_hash=hashed_email):
+            housekeeper = user_datastore.create_user(
+                name = "Letícia Martins",
+                email = email,
+                password = bcrypt.generate_password_hash("abc12345").decode('utf-8'),
+                cpf = "98299673467"
+            )
+            user_datastore.add_role_to_user(housekeeper, "housekeeper")
+            print("Create admin:", housekeeper)
 
         db.session.commit()

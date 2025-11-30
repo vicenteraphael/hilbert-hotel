@@ -25,7 +25,7 @@ def register():
             db.session.commit()
 
 
-            user_datastore.add_role_to_user(user, 'client')
+            user_datastore.add_role_to_user(user, 'guest')
             db.session.commit()
             login_user(user)
             return redirect(url_for('routes.index'))

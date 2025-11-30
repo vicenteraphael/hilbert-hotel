@@ -36,10 +36,17 @@
             <i class="fa-solid fa-infinity text-hilbert-accent text-2xl"></i>
             <span class="text-xl font-bold tracking-wider text-white">HILBERT HOTEL</span>
         </div>
-        <div class="text-sm text-slate-400">
-            Conectado como: {{ current_user.name }} <span class="text-white font-semibold">{{ role|upper }}</span>
-            <a href="{{ url_for('routes.logout') }}" class="ml-4 text-red-400 hover:text-red-300"><i class="fa-solid fa-sign-out-alt"></i> Sair</a>
-        </div>
+        {% if current_user.is_authenticated %}
+            <div class="text-sm text-slate-400">
+                Conectado como: {{ current_user.name }} <span class="text-white font-semibold">{{ role|upper }}</span>
+                    <a href="{{ url_for('routes.logout') }}" class="ml-4 text-red-400 hover:text-red-300"><i class="fa-solid fa-sign-out-alt"></i> Sair</a>
+            </div>
+        {% else %}
+            <div class="text-sm text-slate-400">
+                <a href="{{ url_for('routes.login') }}" class="ml-4 text-red-400 hover:text-red-300"><i class="fa-solid fa-sign-out-alt"></i> Login</a>
+                <a href="{{ url_for('routes.register') }}" class="ml-4 text-red-400 hover:text-red-300"><i class="fa-solid fa-sign-out-alt"></i> Cadastro</a>
+            </div>
+        {% endif %}
     </nav>
 
     <main class="flex-grow p-6">
